@@ -1,3 +1,5 @@
 # SignalHw3
-Sinyal Ödevi 3
-Kankacım 1.soruda sonda pix arrayini image^e çevirdikten sonra yüzde 90 ilk soru bitiyor.Ama yapamadım ondan dolayı yazdım
+Kankacım 1.soruda sonda pix arrayinin içine bizim resimi atmamız lazım.,
+
+
+içine atınca pix[10][15] çağırınca hata vermicek

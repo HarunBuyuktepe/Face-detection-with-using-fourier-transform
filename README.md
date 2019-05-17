@@ -1,5 +1,5 @@
 # SignalHw3
-Kankacım 1.soruda sonda pix arrayinin içine bizim resimi atmamız lazım., (çözüldü)
+Kankacım 1.soruda sonda pix arrayinin içine bizim resimi atmamız lazım., (çözüldü).Ayrıca çalışan kod deneme.py ' de
 
 
 1.soruda istenilen filtreleri uygulayabilmek için istenilen filtrelerin kernellerini bulmalıyız baktım düzgün birşey bulamadım.

@@ -1,11 +1,11 @@
 import cv2
-
+from numpy import exp, sqrt
 import numpy as np
 
 
 face1 = cv2.imread('t1.png', 0)
-face2 = cv2.imread('t2.png', 0)
-face3 = cv2.imread('t3.png', 0)
+face2=cv2.imread('t2.png',0)
+face3=cv2.imread('t3.png',0)
 
 rows, cols = face3.shape
 
@@ -14,9 +14,9 @@ avarage_face = np.zeros((rows, cols, 1), np.uint8)
 
 for i in range(cols):
     for j in range(rows):
-        sumOfFace = face1[j, i]+face2[j, i]+face3[j, i]
-        avarageOfFace = sumOfFace/3
-        image[j, i] = int(avarageOfFace)
+        sumOfFace=face1[j, i]+face2[j,i]+face3[j,i]
+        avarageOfFace=sumOfFace/3
+        avarage_face[j,i]=int(avarageOfFace)
 
 cv2.imshow("Blank Image", avarage_face)
 cv2.imwrite('avarage_face.jpg', avarage_face)
@@ -24,6 +24,80 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 """M[x,y]=1/pq * toplam r sıfırdan p-1 e içinde toplam s sıfırdan q-1 I[x+r][y+s] """
+
+image=cv2.imread('t5.png',0)
+height, width = image.shape
+m_matrix= np.zeros((height, width, 1), np.uint8)
+
+for i in range(height):
+    for j in range(width):
+        sum = 0
+        for k in range(height-i):
+            for l in range(width-j):
+              sum+=(image[i+k,j+l])
+
+        m_matrix[i,j]=(sum/(height*width))
+for i in range(height):
+    for j in range(width):
+        print(m_matrix[i][j])
+
+sum=0
+for k in range(rows):
+    for l in range(cols):
+        sum += avarage_face[k,l]
+Mt=sum/(cols*rows)
+
+print(Mt)
+
+
+a_matrix= np.zeros((height, width, 1), np.uint8)
+
+for i in range(height):
+    for j in range(width):
+        sum=0
+        up=0
+        down1=0
+        down2=0
+        for k in range(height - i):
+            for l in range(width - j):
+                try:
+                    up += (avarage_face[k, l] - Mt) * (image[i + k, j + l] - m_matrix[i, j])
+                except:
+                    up += (0 - Mt) * (image[i + k, j + l] - m_matrix[i, j])
+                try:
+                    down1 += ((avarage_face[k, l] - Mt) * (avarage_face[k, l] - Mt))
+                except:
+                    down1 += ((0 - Mt) * (0 - Mt))
+
+                down2 += ((image[i + k, j + l] - m_matrix[i, j]) * (image[i + k, j + l] - m_matrix[i, j]))
+
+        sum=up/(sqrt(down2)*sqrt(down1))
+        a_matrix[i,j]=sum
+
+max=-1
+for i in range(height):
+    for j in range(width):
+        if max < a_matrix[i][j]:
+            max=a_matrix[i][j]
+
+print(max)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

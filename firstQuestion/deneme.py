@@ -1,9 +1,10 @@
 import matplotlib.pylab as plt
 import pic as pic
+import scipy
 from PIL import Image
 from numpy import pi, exp, sqrt
 import numpy as np
-
+from scipy import ndimage, misc
 
 def filter(img, kernel, name):
     pix = np.array(img)
@@ -132,4 +133,15 @@ gaussian = np.array(kernel)
 gaussian.transpose()
 print(gaussian)
 
+array3 = np.zeros((3, 3))
+array3[1, 1] = 1
+
+array5 = np.zeros((5, 5))
+array5[2, 2] = 1
+
+laplacian = scipy.ndimage.laplace(array3)
+laplacian.transpose()
+print(laplacian)
+
 filter(img, gaussian, "gaussian")
+filter(img, laplacian, "gaussian4")

@@ -5,7 +5,7 @@ from numpy import pi, exp, sqrt
 import numpy as np
 
 
-def filter(img,kernel,name):
+def filter(img, kernel, name):
     pix = np.array(img)
     width, height = img.size  # Get the width and hight of the image for iterating over
     print(width, height)
@@ -118,22 +118,18 @@ def filter(img,kernel,name):
             sum = 0
 
     img = Image.fromarray(pix, 'P')
-    img.save(name+'.png')
+    img.save(name + '.png')
+
 
 img = Image.open('image0.png').convert('L')
 
-#gaussian kerneli yani filtresi
-s, k = 1, 2 #  generate a (2k+1)x(2k+1) gaussian kernel with mean=0 and sigma = s
-probs = [exp(-z*z/(2*s*s))/sqrt(2*pi*s*s) for z in range(-k,k+1)]
+# gaussian kerneli yani filtresi
+s, k = 1, 2  # generate a (2k+1)x(2k+1) gaussian kernel with mean=0 and sigma = s
+probs = [exp(-z * z / (2 * s * s)) / sqrt(2 * pi * s * s) for z in range(-k, k + 1)]
 kernel = np.outer(probs, probs)
 
 gaussian = np.array(kernel)
 gaussian.transpose()
 print(gaussian)
 
-
-filter(img,gaussian,"gaussian")
-
-
-
-
+filter(img, gaussian, "gaussian")

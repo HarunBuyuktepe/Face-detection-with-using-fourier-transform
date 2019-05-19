@@ -14,9 +14,9 @@ avarage_face = np.zeros((rows, cols, 1), np.uint8)
 
 for i in range(cols):
     for j in range(rows):
-        sumOfFace=face1[j, i]+face2[j,i]+face3[j,i]
-        avarageOfFace=sumOfFace/3
-        avarage_face[j,i]=int(avarageOfFace)
+        sumOfFace = face1[j, i] + face2[j,i] + face3[j,i]
+        avarageOfFace = sumOfFace/3
+        avarage_face[j, i] = int(avarageOfFace)
 
 cv2.imshow("Blank Image", avarage_face)
 cv2.imwrite('avarage_face.jpg', avarage_face)
@@ -25,21 +25,21 @@ cv2.destroyAllWindows()
 
 """M[x,y]=1/pq * toplam r sıfırdan p-1 e içinde toplam s sıfırdan q-1 I[x+r][y+s] """
 
-image=cv2.imread('t3.png',0)
+image=cv2.imread('t3.png', )
 height, width = image.shape
-m_matrix= np.zeros((height, width, 1), np.uint8)
+m_matrix = np.zeros((height, width, 1), np.uint8)
 
 for i in range(height):
     for j in range(width):
         sum = 0
-        for k in range(height-i):
-            for l in range(width-j):
-              sum+=image[i+k,j+l]
+        for k in range(height - i):
+            for l in range(width - j):
+              sum += image[i+k, j+l]
 
-        m_matrix[i,j]=int(sum/(height*width))
+        m_matrix[i, j] = int(sum/(height*width))
 #print(m_matrix)
 
-sum=0
+sum = 0
 for k in range(height ):
     for l in range(width ):
         sum += avarage_face[ k,l]

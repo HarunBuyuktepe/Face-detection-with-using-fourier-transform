@@ -16,10 +16,9 @@ def filter(imgname, kernel, name):
         for i in range(height):
             for j in range(width):
                 value = 0
-                tempx = i - 2
-                tempy = j - 2
-
+                tempx = i + 2
                 for kernelX in range(0, 5):
+                    tempy = j + 2
                     for kernelY in range(0, 5):
                         if ((tempx + kernelX >= 0) & (tempy + kernelY >= 0) & (tempy + kernelY < width) & (
                                 tempx + kernelX < height)):
@@ -36,8 +35,7 @@ def filter(imgname, kernel, name):
 
                 for kernelX in range(0, 3):
                     for kernelY in range(0, 3):
-                        if ((tempx + kernelX >= 0) & (tempy + kernelY >= 0) & (tempy + kernelY < width) & (
-                                tempx + kernelX < height)):
+                        if ((tempx + kernelX >= 0) & (tempy + kernelY >= 0) & (tempy + kernelY < width) & (tempx + kernelX < height)):
                             value += image[tempx + kernelX][tempy + kernelY] * kernel[kernelX][kernelY]
                 image[i,j]=value
     img = Image.fromarray(image, 'P')

@@ -44,19 +44,22 @@ def filter(imgname, kernel, name):
     img.save(name + '.png')
 
 
-
-
-s, k = 1, 2
-probs = [exp(-z*z/(2*s*s))/sqrt(2*pi*s*s) for z in range(-k,k+1)]
-gaussian_kernel = np.outer(probs, probs)
-
-laplacian_kernel = np.array((
-   [0.1 ,0.1 ,0.1],
-   [ 0.1, -1,0.1],
-   [ 0.1, 0.1,0.1]), dtype="int")
+array5 = np.zeros((5, 5))
+array5[2, 2] = 1
 
 array3 = np.zeros((3, 3))
 array3[1, 1] = 1
+
+gaussian_kernel = scipy.ndimage.gaussian_filter(array5, 5)
+print(gaussian_kernel)
+
+laplacian_kernel = np.array((
+   [0.1,0.1 ,0.1],
+   [0.1, -1,0.1],
+   [0.1, 0.1,0.1]), dtype="int")
+
+
+
 sobel_kernel = scipy.ndimage.sobel(array3)
 
 filter('cameraman.tif',laplacian_kernel,'Laplacian')

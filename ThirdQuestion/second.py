@@ -3,7 +3,7 @@ import struct
 import numpy as np
 from math import exp, pi,sin
 
-ses=wave.open('sine24.wav', mode='rb')
+ses = wave.open('sine24.wav', mode='rb')
 print(wave.Wave_read.getsampwidth(ses))#Returns sample width in bytes
 print(wave.Wave_read.getframerate(ses))#Returns sampling frequency.
 print(wave.Wave_read.getnframes(ses))#Returns number of audio frames.
@@ -19,17 +19,15 @@ if __name__ == '__main__':
     fname = "sine24.wav"
     frate = 11025.0
     amp = 64000.0
-    nchannels = 1
+    nchannels = 2
     sampwidth = 2
     framerate = int(frate)
     nframes = data_size
     comptype = "NONE"
     compname = "not compressed"
-    data = [sin(2 * pi * freq * (x / frate))
-            for x in range(data_size)]
+    data = [sin(2 * pi * freq * (x / frate)) for x in range(data_size)]
     wav_file = wave.open(fname, 'w')
-    wav_file.setparams(
-        (nchannels, sampwidth, framerate, nframes, comptype, compname))
+    wav_file.setparams((nchannels, sampwidth, framerate, nframes, comptype, compname))
     for v in data:
         wav_file.writeframes(struct.pack('h', int(v * amp / 2)))
     wav_file.close()
@@ -37,8 +35,8 @@ if __name__ == '__main__':
     print(wave.Wave_read.getsampwidth(wav_file))  # Returns sample width in bytes
     print(wave.Wave_read.getframerate(wav_file))  # Returns sampling frequency.
     print(wave.Wave_read.getnframes(wav_file))  # Returns number of audio frames.
-    print(wave.Wave_read.getparams(
-        wav_file))  # Returns a namedtuple() (nchannels, sampwidth, framerate, nframes, comptype, compname), equivalent to output of the get*() methods.
+    print(wave.Wave_read.getparams(wav_file))
+    # Returns a namedtuple() (nchannels, sampwidth, framerate, nframes, comptype, compname), equivalent to output of the get*() methods.
     data_size = 40000
     fname = "sine24.wav"
     frate = 11025.0
@@ -50,7 +48,7 @@ if __name__ == '__main__':
 
     w = np.fft.fft(data)
     freqs = np.fft.fftfreq(len(w))
-    print(freqs.min(), freqs.max())
+    #print(freqs.min(), freqs.max())
 
     c=len(freqs)
     for i in range(c):
